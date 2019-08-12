@@ -7,6 +7,7 @@ import Invoice from './components/customer/Invoice'
 Vue.use(Router)
 
 export default new Router({
+    mode: 'history',
     routes: [
         {
             path: '',
@@ -17,7 +18,7 @@ export default new Router({
             component: Login
         },
         {
-            path: '/customer',
+            path: '/customer/:user',
             component: Dashboard,
             children: [
                 {

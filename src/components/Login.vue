@@ -34,7 +34,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" @click.prevent="login" tile>Login</v-btn>
+                  <v-btn color="primary" @click.prevent="login" tile type="submit">Login</v-btn>
                 </v-card-actions>
               </v-flex>
             </v-card>

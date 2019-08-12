@@ -14,7 +14,7 @@
           </v-flex>
         </v-layout>
         
-        <v-list-item link to>
+        <v-list-item link to="invoice">
           <v-list-item-action>
             <v-icon>add</v-icon>
           </v-list-item-action>

@@ -58,7 +58,7 @@
     </v-card-text>
     <v-card-actions>
       <v-container>
-        <v-btn color="primary" raised>แจ้งซ่อม</v-btn>
+        <v-btn color="primary" tile>แจ้งซ่อม</v-btn>
       </v-container>
     </v-card-actions>
   </v-card>
