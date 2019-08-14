@@ -16,7 +16,7 @@
                 <v-card-text>
                   <v-form @keyup.enter="login">
                     <v-text-field
-                      label="ชื่อผู้ใช้งาน"
+                      label="อีเมล์"
                       name="login"
                       prepend-icon="person"
                       type="text"
@@ -33,8 +33,9 @@
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
+                  <v-btn text tile>สมัครสมาชิก</v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" @click.prevent="login" tile type="submit">Login</v-btn>
+                  <v-btn color="primary" @click.prevent="login" tile type="submit">เข้าสู่ระบบ</v-btn>
                 </v-card-actions>
               </v-flex>
             </v-card>
