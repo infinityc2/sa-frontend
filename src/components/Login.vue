@@ -48,16 +48,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      user: {
-        username: "",
-        password: ""
-      }
-    };
-  },
+  data: () => ({
+    user: {
+      username: "",
+      password: ""
+    }
+  }),
   methods: {
-    login: function() {
+    login: () => {
       this.$log.debug("Welcome " + this.user.username);
     }
   }

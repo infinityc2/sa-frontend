@@ -13,7 +13,7 @@
             <v-subheader>จัดการ</v-subheader>
           </v-flex>
         </v-layout>
-        
+
         <v-list-item link to="invoice">
           <v-list-item-action>
             <v-icon>add</v-icon>
@@ -25,7 +25,7 @@
       </v-list>
       <v-divider dark class="my-4"></v-divider>
       <v-list dense class="deep-orange lighten-5">
-          <v-layout align-center>
+        <v-layout align-center>
           <v-flex xs6>
             <v-subheader>ระบบ</v-subheader>
           </v-flex>
@@ -57,11 +57,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      drawer: null
-    };
-  }
+  data: () => ({
+    drawer: null
+  })
 };
 </script>
 

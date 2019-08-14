@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" elevation="24" tile max-width="600" color="secondary">
     <v-container>
-        <v-card-title class="display-1">แจ้งซ่อม</v-card-title>
+      <v-card-title class="display-1">แจ้งซ่อม</v-card-title>
     </v-container>
     <v-card-text>
       <v-form>
@@ -66,22 +66,20 @@
 
 <script>
 export default {
-  data() {
-    return {
-      date: new Date().toDateString().substr(0, 10),
-      menu: false,
-      invoice: {
-        dianose: null,
-        type: null,
-        brand: null,
-        sent: null,
-        tools: [],
-        email: null,
-        phone: null,
-        customer: ""
-      }
-    };
-  }
+  data: () => ({
+    date: new Date().toDateString().substr(0, 10),
+    menu: false,
+    invoice: {
+      dianose: null,
+      type: null,
+      brand: null,
+      sent: null,
+      tools: [],
+      email: null,
+      phone: null,
+      customer: ""
+    }
+  })
 };
 </script>
 
