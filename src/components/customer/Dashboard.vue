@@ -22,6 +22,24 @@
             <v-list-item-title class="grey--text">แจ้งซ่อม</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item link to="">
+          <v-list-item-action>
+            <v-icon>remove</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="grey--text">ยกเลิกการแจ้งซ่อม</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link to="evaluation">
+          <v-list-item-action>
+            <v-icon>thumbs_up_down</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="grey--text">ประเมินแจ้งซ่อม</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <v-divider dark class="my-4"></v-divider>
       <v-list dense class="deep-orange lighten-5">

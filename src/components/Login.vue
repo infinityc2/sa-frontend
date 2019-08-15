@@ -4,7 +4,7 @@
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
-            <v-card class="elevation-3" tile>
+            <v-card class="elevation-3" tile color="secondary">
               <v-flex shrink class="mx-auto">
                 <v-img
                   height="275"
@@ -33,7 +33,7 @@
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn text tile>สมัครสมาชิก</v-btn>
+                  <v-btn text tile to="/register">สมัครสมาชิก</v-btn>
                   <v-spacer></v-spacer>
                   <v-btn color="primary" @click.prevent="login" tile type="submit">เข้าสู่ระบบ</v-btn>
                 </v-card-actions>
