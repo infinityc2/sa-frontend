@@ -7,6 +7,8 @@ import Invoice from './components/customer/Invoice'
 import Evaluation from './components/customer/Evaluation'
 import Employee from './components/employee/Dashboard'
 import Payment from './components/employee/Payment'
+import Admin from './components/admin/Dashboard'
+import AddEmployee from './components/admin/AddEmployee'
 
 Vue.use(Router)
 
@@ -54,6 +56,20 @@ export default new Router({
                 {
                     path: 'payment',
                     component: Payment
+                }
+            ]
+        },
+        {
+            path: '/admin/:user',
+            component: Admin,
+            children: [
+                {
+                    path: '',
+                    redirect: 'addemployee'
+                },
+                {
+                    path: 'addemployee',
+                    component: AddEmployee
                 }
             ]
         }

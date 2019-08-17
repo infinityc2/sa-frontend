@@ -55,7 +55,7 @@ export default {
     }
   }),
   methods: {
-    login: () => {
+    login: function () {
       this.$log.debug("Welcome " + this.user.username);
     }
   }
