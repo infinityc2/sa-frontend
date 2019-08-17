@@ -2,9 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './components/Login'
 import Register from './components/Register'
-import Dashboard from './components/customer/Dashboard'
+import Customer from './components/customer/Dashboard'
 import Invoice from './components/customer/Invoice'
 import Evaluation from './components/customer/Evaluation'
+import Employee from './components/employee/Dashboard'
+import Payment from './components/employee/Payment'
 
 Vue.use(Router)
 
@@ -25,7 +27,7 @@ export default new Router({
         },
         {
             path: '/customer/:user',
-            component: Dashboard,
+            component: Customer,
             children: [
                 {
                     path: '',
@@ -38,6 +40,20 @@ export default new Router({
                 {
                     path: 'evaluation',
                     component: Evaluation
+                }
+            ]
+        },
+        {
+            path: '/employee/:user',
+            component: Employee,
+            children: [
+                {
+                    path: '',
+                    redirect: 'payment'
+                },
+                {
+                    path: 'payment',
+                    component: Payment
                 }
             ]
         }

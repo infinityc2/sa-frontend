@@ -68,7 +68,7 @@
       <v-card-actions>
         <v-btn text tile class="ml-5" to="/login">กลับ</v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="primary" tile class="mr-5">สมัคร</v-btn>
+        <v-btn color="primary" tile class="mr-5">สมัครสมาชิก</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
