@@ -42,7 +42,7 @@
                   <template v-slot:activator="{ on }">
                     <v-text-field
                       v-model="date"
-                      label="วันที่ส่งซ่อม"
+                      label="วันเกิด"
                       prepend-icon="event"
                       readonly
                       v-on="on"

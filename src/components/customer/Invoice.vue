@@ -8,13 +8,13 @@
         <v-container>
           <v-layout wrap column>
             <v-flex xs12 md4>
-              <v-text-field label="อาการของคอมพิวเตอร์" v-model="invoice.dianose"></v-text-field>
+              <v-text-field label="อาการของคอมพิวเตอร์" v-model="invoice.symptom"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
-              <v-select label="ชนิดของคอมพิวเตอร์" v-model="invoice.type"></v-select>
+              <v-select label="ชนิดของคอมพิวเตอร์" v-model="invoice.type" :items="computerType"></v-select>
             </v-flex>
             <v-flex xs12 md4>
-              <v-select label="ยี่ห้อ" v-model="invoice.brand"></v-select>
+              <v-select label="ยี่ห้อ" v-model="invoice.brand" :items="brand"></v-select>
             </v-flex>
             <v-flex xs12 md4>
               <v-menu
@@ -36,15 +36,15 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="invoice.sent" no-title scrollable>
+                <v-date-picker v-model="invoice.sentDate" no-title scrollable>
                   <v-spacer></v-spacer>
                   <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                  <v-btn text color="primary" @click="$refs.menu.save(invoice.sent)">OK</v-btn>
+                  <v-btn text color="primary" @click="$refs.menu.save(invoice.sentDate)">OK</v-btn>
                 </v-date-picker>
               </v-menu>
             </v-flex>
             <v-flex xs12 md4>
-              <v-select label="อุปกรณ์หรือ software ที่จะติดตั้ง" v-model="invoice.tool"></v-select>
+              <v-select label="อุปกรณ์หรือ software ที่จะติดตั้ง" v-model="invoice.tools" :items="tools" multiple chips></v-select>
             </v-flex>
             <v-flex xs12 md4>
               <v-text-field label="Email" v-model="invoice.email"></v-text-field>
@@ -58,28 +58,72 @@
     </v-card-text>
     <v-card-actions>
       <v-container>
-        <v-btn color="primary" tile>แจ้งซ่อม</v-btn>
+        <v-btn color="primary" tile @click="postInvoice">แจ้งซ่อม</v-btn>
       </v-container>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import Provider from '../../services/provider'
+
 export default {
   data: () => ({
     date: new Date().toDateString().substr(0, 10),
     menu: false,
     invoice: {
-      dianose: null,
+      symptom: null,
       type: null,
       brand: null,
-      sent: null,
+      sentDate: null,
       tools: [],
       email: null,
       phone: null,
-      customer: ""
+      customer: null
+    },
+    brand: [],
+    computerType: [],
+    tools: []
+  }),
+  mounted() {
+    Provider.getBrand().then(response => {
+      this.$log.debug("Data loaded: ", response.data)
+      response.data.forEach(element => {
+        this.brand.push({
+          text: element.name,
+          value: element.id
+        })
+      });
+    })
+    Provider.getComputerType().then(response => {
+      this.$log.debug("Data loaded: ", response.data)
+      response.data.forEach(element => {
+        this.computerType.push({
+          text: element.type,
+          value: element.id
+        })
+      })
+    })
+    Provider.getTool().then(response => {
+      this.$log.debug("Data loaded: ", response.data)
+      response.data.forEach(element => {
+        this.tools.push({
+          text: element.name + ': ' + element.price + ' บาท',
+          value: element.id
+        })
+      })
+    })
+  },
+  methods: {
+    postInvoice: function () {
+      Provider.postInvoice(this.invoice).then(response => {
+        this.$log.debug("Add Invoice Complete", response.data)
+      })
+      .catch(error => {
+        this.$log.debug(error.response.data.message)
+      })
     }
-  })
+  }
 };
 </script>
 
