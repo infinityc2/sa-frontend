@@ -61,6 +61,11 @@
         <v-btn color="primary" tile @click="postInvoice">แจ้งซ่อม</v-btn>
       </v-container>
     </v-card-actions>
+
+    <v-snackbar v-model="snackbar">
+      {{ warningText }}
+      <v-btn text color="primary" @click="snackbar = !snackbar">ปิด</v-btn>
+    </v-snackbar>
   </v-card>
 </template>
 
@@ -69,8 +74,10 @@ import Provider from '../../services/provider'
 
 export default {
   data: () => ({
-    date: new Date().toDateString().substr(0, 10),
+    date: null, // new Date().toDateString().substr(0, 10),
     menu: false,
+    snackbar: false,
+    warningText: '',
     invoice: {
       symptom: null,
       type: null,
@@ -117,10 +124,15 @@ export default {
   methods: {
     postInvoice: function () {
       Provider.postInvoice(this.invoice).then(response => {
+        this.warningText = 'การแจ้งซ่อมสำเร็จ'
         this.$log.debug("Add Invoice Complete", response.data)
       })
       .catch(error => {
+        this.warningText = 'ไม่สามารถทำการแจ้งซ่อมได้'
         this.$log.debug(error.response.data.message)
+      })
+      .finally(() => {
+        this.snackbar = !this.snackbar
       })
     }
   }
