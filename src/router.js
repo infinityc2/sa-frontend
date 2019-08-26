@@ -12,7 +12,7 @@ import AddEmployee from './components/admin/AddEmployee'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
     mode: 'history',
     routes: [
         {
@@ -43,7 +43,10 @@ export default new Router({
                     path: 'evaluation',
                     component: Evaluation
                 }
-            ]
+            ],
+            // meta: {
+            //     requiresAuth: true
+            // }
         },
         {
             path: '/employee/:user',
@@ -57,7 +60,10 @@ export default new Router({
                     path: 'payment',
                     component: Payment
                 }
-            ]
+            ],
+            // meta: {
+            //     requiresAuth: true
+            // }
         },
         {
             path: '/admin/:user',
@@ -71,7 +77,20 @@ export default new Router({
                     path: 'addemployee',
                     component: AddEmployee
                 }
-            ]
+            ],
+            // meta: {
+            //     requiresAuth: true
+            // }
         }
     ]
 })
+
+// router.beforeEach((to, from, next) => {
+//     if (to.params.user && from.meta.requireAuth) {
+//         next()
+//     } else {
+//         next('/login')
+//     }
+// })
+
+export default router

@@ -47,7 +47,7 @@
               <v-select label="อุปกรณ์หรือ software ที่จะติดตั้ง" v-model="invoice.tools" :items="tools" multiple chips></v-select>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field label="Email" v-model="invoice.email"></v-text-field>
+              <v-text-field label="Email" v-model="invoice.email" type="email"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
               <v-text-field label="เบอร์โทรศัพท์" v-model="invoice.phone"></v-text-field>
@@ -122,8 +122,8 @@ export default {
     })
   },
   methods: {
-    postInvoice: function () {
-      Provider.postInvoice(this.invoice).then(response => {
+    postInvoice: async function () {
+      await Provider.postInvoice(this.invoice).then(response => {
         this.warningText = 'การแจ้งซ่อมสำเร็จ'
         this.$log.debug("Add Invoice Complete", response.data)
       })

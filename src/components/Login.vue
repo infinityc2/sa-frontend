@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import Provider from '../services/provider'
+
 export default {
   data: () => ({
     user: {
@@ -55,8 +57,13 @@ export default {
     }
   }),
   methods: {
-    login: function () {
-      this.$log.debug("Welcome " + this.user.username);
+    login: async function () {
+      await Provider.loginCustomer(this.user).then(() => {
+        this.$log.debug("Welcome " + this.user.username);
+      })
+      .catch(error => {
+        this.$log.debug('Invalid Email or Password', error);
+      })
     }
   }
 };
