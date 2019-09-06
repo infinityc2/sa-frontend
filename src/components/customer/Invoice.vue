@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import Provider from '../../services/provider'
+import InvoiceController from '../../services/InvoiceComtroller'
 
 export default {
   data: () => ({
@@ -93,7 +93,7 @@ export default {
     tools: []
   }),
   mounted() {
-    Provider.getBrand().then(response => {
+    InvoiceController.getBrand().then(response => {
       this.$log.debug("Data loaded: ", response.data)
       response.data.forEach(element => {
         this.brand.push({
@@ -102,7 +102,7 @@ export default {
         })
       });
     })
-    Provider.getComputerType().then(response => {
+    InvoiceController.getComputerType().then(response => {
       this.$log.debug("Data loaded: ", response.data)
       response.data.forEach(element => {
         this.computerType.push({
@@ -111,7 +111,7 @@ export default {
         })
       })
     })
-    Provider.getTool().then(response => {
+    InvoiceController.getTool().then(response => {
       this.$log.debug("Data loaded: ", response.data)
       response.data.forEach(element => {
         this.tools.push({
@@ -122,8 +122,8 @@ export default {
     })
   },
   methods: {
-    postInvoice: async function () {
-      await Provider.postInvoice(this.invoice).then(response => {
+    postInvoice: function () {
+      InvoiceController.postInvoice(this.invoice).then(response => {
         this.warningText = 'การแจ้งซ่อมสำเร็จ'
         this.$log.debug("Add Invoice Complete", response.data)
       })

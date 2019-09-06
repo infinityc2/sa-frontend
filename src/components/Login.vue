@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import Provider from '../services/provider'
+import InvoiceController from '../services/InvoiceComtroller'
 
 export default {
   data: () => ({
@@ -57,8 +57,8 @@ export default {
     }
   }),
   methods: {
-    login: async function () {
-      await Provider.loginCustomer(this.user).then(() => {
+    login: function () {
+      InvoiceController.loginCustomer(this.user).then(() => {
         this.$log.debug("Welcome " + this.user.username);
       })
       .catch(error => {
