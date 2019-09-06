@@ -5,6 +5,7 @@ import Register from './components/Register'
 import Customer from './components/customer/Dashboard'
 import Invoice from './components/customer/Invoice'
 import Evaluation from './components/customer/Evaluation'
+import CancelInvoice from './components/customer/CancelInvoice'
 import Employee from './components/employee/Dashboard'
 import Payment from './components/employee/Payment'
 import Admin from './components/admin/Dashboard'
@@ -42,6 +43,10 @@ let router = new Router({
                 {
                     path: 'evaluation',
                     component: Evaluation
+                },
+                {
+                    path: 'cancel',
+                    component: CancelInvoice
                 }
             ],
             // meta: {
