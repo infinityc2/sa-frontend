@@ -8,13 +8,13 @@
         <v-container>
           <v-layout wrap column>
             <v-flex xs12 md4>
-              <v-text-field label="อาการของคอมพิวเตอร์" v-model="invoice.symptom"></v-text-field>
+              <v-text-field label="อาการของคอมพิวเตอร์" v-model="invoice.symptom" :rules="[rules.require]"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
-              <v-select label="ชนิดของคอมพิวเตอร์" v-model="invoice.type" :items="computerType"></v-select>
+              <v-select label="ชนิดของคอมพิวเตอร์" v-model="invoice.type" :items="computerType" :rules="[rules.require]"></v-select>
             </v-flex>
             <v-flex xs12 md4>
-              <v-select label="ยี่ห้อ" v-model="invoice.brand" :items="brand"></v-select>
+              <v-select label="ยี่ห้อ" v-model="invoice.brand" :items="brand" :rules="[rules.require]"></v-select>
             </v-flex>
             <v-flex xs12 md4>
               <v-menu
@@ -47,10 +47,10 @@
               <v-select label="อุปกรณ์หรือ software ที่จะติดตั้ง" v-model="invoice.tools" :items="tools" multiple chips></v-select>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field label="Email" v-model="invoice.email" type="email"></v-text-field>
+              <v-text-field label="Email" v-model="invoice.email" type="email" :rules="[rules.email]"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field label="เบอร์โทรศัพท์" v-model="invoice.phone"></v-text-field>
+              <v-text-field label="เบอร์โทรศัพท์" v-model="invoice.phone" :rules="[rules.number]"></v-text-field>
             </v-flex>
           </v-layout>
         </v-container>
@@ -90,7 +90,12 @@ export default {
     },
     brand: [],
     computerType: [],
-    tools: []
+    tools: [],
+    rules: {
+      email: value => /.+@.+\..+/.test(value) || 'รูปแบบ Email ไม่ถูกต้อง',
+      number: value => /^\d+$/.test(value) || 'รูปแบบเบอร์โทรไม่ถูกต้อง',
+      require: value => !!value || 'กรุณาป้อนข้อมูล'
+    }
   }),
   mounted() {
     InvoiceController.getBrand().then(response => {
