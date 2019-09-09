@@ -3,7 +3,7 @@ import axios from 'axios'
 // END POINT
 // 'https://repair-invoice-system-api.herokuapp.com'
 // 'http://localhost:9000'
-const SERVER_URL = 'https://repair-invoice-system-api.herokuapp.com/' 
+const SERVER_URL = 'http://localhost:9000'
 
 const instance = axios.create({
     baseURL: SERVER_URL,

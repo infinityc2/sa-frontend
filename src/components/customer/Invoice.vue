@@ -92,7 +92,7 @@ export default {
     computerType: [],
     tools: [],
     rules: {
-      email: value => /.+@.+\..+/.test(value) || 'รูปแบบ Email ไม่ถูกต้อง',
+      email: value => /^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$/.test(value) || 'รูปแบบ Email ไม่ถูกต้อง',
       number: value => /^\d+$/.test(value) || 'รูปแบบเบอร์โทรไม่ถูกต้อง',
       require: value => !!value || 'กรุณาป้อนข้อมูล'
     }

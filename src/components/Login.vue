@@ -20,7 +20,7 @@
                       name="login"
                       prepend-icon="person"
                       type="text"
-                      v-model="user.username"
+                      v-model="user.email"
                     ></v-text-field>
 
                     <v-text-field
@@ -52,14 +52,19 @@ import InvoiceController from '../services/InvoiceComtroller'
 export default {
   data: () => ({
     user: {
-      username: "",
+      email: "",
       password: ""
     }
   }),
   methods: {
     login: function () {
-      InvoiceController.loginCustomer(this.user).then(() => {
-        this.$log.debug("Welcome " + this.user.username);
+      InvoiceController.loginCustomer(this.user).then(response => {
+        if (response.data.id) {
+          this.$log.debug(response.data.message, this.user.email);
+          this.$router.push('/customer/' + response.data.id)
+        } else {
+          this.$log.debug(response.data.message)
+        }
       })
       .catch(error => {
         this.$log.debug('Invalid Email or Password', error);
