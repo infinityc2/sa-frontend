@@ -44,10 +44,16 @@
               </v-menu>
             </v-flex>
             <v-flex xs12 md4>
-              <v-select label="อุปกรณ์หรือ software ที่จะติดตั้ง" v-model="invoice.tools" :items="tools" multiple chips></v-select>
+              <tool @addTool="setTool"></tool>
+              <v-list v-if="invoice.tools.length > 0" class="mt-3" color="secondary">
+                <v-list-item v-for="(tool, index) in items" :key="tool.id">
+                  <v-list-item-title class="black--text">{{ index + 1 }}. {{ tool.name }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+              <!-- <v-select label="อุปกรณ์หรือ software ที่จะติดตั้ง" v-model="invoice.tools" :items="tools" multiple chips></v-select> -->
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field label="Email" v-model="invoice.email" type="email" :rules="[rules.email]"></v-text-field>
+              <v-text-field label="Email" v-model="invoice.email" type="email"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
               <v-text-field label="เบอร์โทรศัพท์" v-model="invoice.phone" :rules="[rules.number]"></v-text-field>
@@ -70,14 +76,19 @@
 </template>
 
 <script>
-import InvoiceController from '../../services/InvoiceComtroller'
+import InvoiceController from '../../services/InvoiceController'
+import Tool from './parts/Tool'
 
 export default {
+  components: {
+    Tool
+  },
   data: () => ({
     date: null, // new Date().toDateString().substr(0, 10),
     menu: false,
     snackbar: false,
     warningText: '',
+    items: [],
     invoice: {
       symptom: null,
       type: null,
@@ -92,11 +103,14 @@ export default {
     computerType: [],
     tools: [],
     rules: {
-      email: value => /^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$/.test(value) || 'รูปแบบ Email ไม่ถูกต้อง',
+      email: value => /[A-Za-z0-9._]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}/.test(value) || 'รูปแบบ Email ไม่ถูกต้อง',
       number: value => /^\d+$/.test(value) || 'รูปแบบเบอร์โทรไม่ถูกต้อง',
       require: value => !!value || 'กรุณาป้อนข้อมูล'
     }
   }),
+  created() {
+    this.invoice.customer = Number(this.$route.params.user)
+  },
   mounted() {
     InvoiceController.getBrand().then(response => {
       this.$log.debug("Data loaded: ", response.data)
@@ -116,18 +130,19 @@ export default {
         })
       })
     })
-    InvoiceController.getTool().then(response => {
-      this.$log.debug("Data loaded: ", response.data)
-      response.data.forEach(element => {
-        this.tools.push({
-          text: element.name + ': ' + element.price + ' บาท',
-          value: element.id
-        })
-      })
-    })
+    // InvoiceController.getTool().then(response => {
+    //   this.$log.debug("Data loaded: ", response.data)
+    //   response.data.forEach(element => {
+    //     this.tools.push({
+    //       text: element.name + ': ' + element.price + ' บาท',
+    //       value: element.id
+    //     })
+    //   })
+    // })
   },
   methods: {
     postInvoice: function () {
+      this.$log.debug(this.invoice)
       InvoiceController.postInvoice(this.invoice).then(response => {
         this.warningText = 'การแจ้งซ่อมสำเร็จ'
         this.$log.debug("Add Invoice Complete", response.data)
@@ -139,6 +154,14 @@ export default {
       .finally(() => {
         this.snackbar = !this.snackbar
       })
+    },
+    setTool: function (tool) {
+      this.items = tool
+      this.invoice.tools = []
+      tool.forEach(snapshot => {
+        this.invoice.tools.push(snapshot.id)
+      })
+      this.$log.debug(this.invoice.tools)
     }
   }
 };

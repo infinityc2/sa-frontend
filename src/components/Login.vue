@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import InvoiceController from '../services/InvoiceComtroller'
+import InvoiceController from '../services/InvoiceController'
 
 export default {
   data: () => ({
