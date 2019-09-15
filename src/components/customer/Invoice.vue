@@ -50,7 +50,6 @@
                   <v-list-item-title class="black--text">{{ index + 1 }}. {{ tool.name }}</v-list-item-title>
                 </v-list-item>
               </v-list>
-              <!-- <v-select label="อุปกรณ์หรือ software ที่จะติดตั้ง" v-model="invoice.tools" :items="tools" multiple chips></v-select> -->
             </v-flex>
             <v-flex xs12 md4>
               <v-text-field label="Email" v-model="invoice.email" type="email"></v-text-field>
@@ -103,7 +102,7 @@ export default {
     computerType: [],
     tools: [],
     rules: {
-      email: value => /[A-Za-z0-9._]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}/.test(value) || 'รูปแบบ Email ไม่ถูกต้อง',
+      email: value => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value) || 'รูปแบบ Email ไม่ถูกต้อง',
       number: value => /^\d+$/.test(value) || 'รูปแบบเบอร์โทรไม่ถูกต้อง',
       require: value => !!value || 'กรุณาป้อนข้อมูล'
     }
@@ -130,15 +129,6 @@ export default {
         })
       })
     })
-    // InvoiceController.getTool().then(response => {
-    //   this.$log.debug("Data loaded: ", response.data)
-    //   response.data.forEach(element => {
-    //     this.tools.push({
-    //       text: element.name + ': ' + element.price + ' บาท',
-    //       value: element.id
-    //     })
-    //   })
-    // })
   },
   methods: {
     postInvoice: function () {
