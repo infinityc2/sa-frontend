@@ -8,8 +8,6 @@ import Evaluation from './components/customer/Evaluation'
 import CancelInvoice from './components/customer/CancelInvoice'
 import Employee from './components/employee/Dashboard'
 import Payment from './components/employee/Payment'
-import Admin from './components/admin/Dashboard'
-import AddEmployee from './components/admin/AddEmployee'
 
 Vue.use(Router)
 
@@ -49,9 +47,6 @@ let router = new Router({
                     component: CancelInvoice
                 }
             ],
-            // meta: {
-            //     requiresAuth: true
-            // }
         },
         {
             path: '/employee/:user',
@@ -66,36 +61,8 @@ let router = new Router({
                     component: Payment
                 }
             ],
-            // meta: {
-            //     requiresAuth: true
-            // }
-        },
-        {
-            path: '/admin/:user',
-            component: Admin,
-            children: [
-                {
-                    path: '',
-                    redirect: 'addemployee'
-                },
-                {
-                    path: 'addemployee',
-                    component: AddEmployee
-                }
-            ],
-            // meta: {
-            //     requiresAuth: true
-            // }
         }
     ]
 })
-
-// router.beforeEach((to, from, next) => {
-//     if (to.params.user && from.meta.requireAuth) {
-//         next()
-//     } else {
-//         next('/login')
-//     }
-// })
 
 export default router

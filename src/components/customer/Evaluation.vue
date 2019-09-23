@@ -8,15 +8,15 @@
         <v-container>
           <v-layout wrap column>
             <v-flex xs12 md4>
-              <v-select label="ความสะดวกในการใช้บริการ"></v-select>
+              
             </v-flex>
             <v-flex xs12 md4>
-              <v-select label="ซ่อมครบถ้วนตามที่แจ้ง"></v-select>
+              
             </v-flex>
             <v-flex xs12 md4>
-              <v-select label="ความรวดเร็วในการซ่อม"></v-select>
+              
             </v-flex>
-            <v-textarea label="ข้อเสนอแนะ"></v-textarea>
+            
           </v-layout>
         </v-container>
       </v-form>
