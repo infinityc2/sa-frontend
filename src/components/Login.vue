@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import InvoiceController from '../services/InvoiceController'
+import RequestController from '../services/RequestController'
 
 export default {
   data: () => ({
@@ -58,7 +58,7 @@ export default {
   }),
   methods: {
     login: function () {
-      InvoiceController.loginCustomer(this.user).then(response => {
+      RequestController.loginCustomer(this.user).then(response => {
         if (response.data.id) {
           this.$log.debug(response.data.message, this.user.email);
           this.$router.push('/customer/' + response.data.id)

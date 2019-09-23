@@ -10,14 +10,14 @@
             <v-flex xs12 md4>
               <v-text-field
                 label="อาการของคอมพิวเตอร์"
-                v-model="invoice.symptom"
+                v-model="request.symptom"
                 :rules="[rules.require]"
               ></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
               <v-select
                 label="ชนิดของคอมพิวเตอร์"
-                v-model="invoice.type"
+                v-model="request.type"
                 :items="computerType"
                 :rules="[rules.require]"
               ></v-select>
@@ -25,7 +25,7 @@
             <v-flex xs12 md4>
               <v-select
                 label="ยี่ห้อ"
-                v-model="invoice.brand"
+                v-model="request.brand"
                 :items="brand"
                 :rules="[rules.require]"
               ></v-select>
@@ -50,26 +50,26 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="invoice.sentDate" no-title scrollable>
+                <v-date-picker v-model="request.sentDate" no-title scrollable>
                   <v-spacer></v-spacer>
                   <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                  <v-btn text color="primary" @click="$refs.menu.save(invoice.sentDate)">OK</v-btn>
+                  <v-btn text color="primary" @click="$refs.menu.save(request.sentDate)">OK</v-btn>
                 </v-date-picker>
               </v-menu>
             </v-flex>
             <v-flex xs12 md4>
               <tool @addTool="setTool"></tool>
-              <v-list v-if="invoice.tools.length > 0" class="mt-3" color="secondary">
+              <v-list v-if="request.tools.length > 0" class="mt-3" color="secondary">
                 <v-list-item v-for="(tool, index) in items" :key="tool.id">
                   <v-list-item-title class="black--text">{{ index + 1 }}. {{ tool.name }}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field label="Email" v-model="invoice.email" type="email" :rules="[rules.email]"></v-text-field>
+              <v-text-field label="Email" v-model="request.email" type="email" :rules="[rules.email]"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field label="เบอร์โทรศัพท์" v-model="invoice.phone" :rules="[rules.number]"></v-text-field>
+              <v-text-field label="เบอร์โทรศัพท์" v-model="request.phone" :rules="[rules.number]"></v-text-field>
             </v-flex>
           </v-layout>
         </v-container>
@@ -77,7 +77,7 @@
     </v-card-text>
     <v-card-actions>
       <v-container>
-        <v-btn color="primary" tile @click="postInvoice">แจ้งซ่อม</v-btn>
+        <v-btn color="primary" tile @click="addRequest">แจ้งซ่อม</v-btn>
       </v-container>
     </v-card-actions>
 
@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import InvoiceController from "../../services/InvoiceController";
+import RequestController from "../../services/RequestController";
 import Tool from "./parts/Tool";
 
 export default {
@@ -102,7 +102,7 @@ export default {
     snackbar: false,
     warningText: "",
     items: [],
-    invoice: {
+    request: {
       symptom: null,
       type: null,
       brand: null,
@@ -122,10 +122,10 @@ export default {
     }
   }),
   created() {
-    this.invoice.customer = Number(this.$route.params.user);
+    this.request.customer = Number(this.$route.params.user);
   },
   mounted() {
-    InvoiceController.getBrand().then(response => {
+    RequestController.getBrand().then(response => {
       this.$log.debug("Data loaded: ", response.data);
       response.data.forEach(element => {
         this.brand.push({
@@ -134,7 +134,7 @@ export default {
         });
       });
     });
-    InvoiceController.getComputerType().then(response => {
+    RequestController.getComputerType().then(response => {
       this.$log.debug("Data loaded: ", response.data);
       response.data.forEach(element => {
         this.computerType.push({
@@ -145,12 +145,12 @@ export default {
     });
   },
   methods: {
-    postInvoice: function() {
-      this.$log.debug(this.invoice);
-      InvoiceController.postInvoice(this.invoice)
+    addRequest: function() {
+      this.$log.debug(this.request);
+      RequestController.addRequest(this.request)
         .then(response => {
           this.warningText = "การแจ้งซ่อมสำเร็จ";
-          this.$log.debug("Add Invoice Complete", response.data);
+          this.$log.debug("Add Request Complete", response.data);
         })
         .catch(error => {
           this.warningText = "ไม่สามารถทำการแจ้งซ่อมได้";
@@ -158,15 +158,26 @@ export default {
         })
         .finally(() => {
           this.snackbar = !this.snackbar;
+          this.clearRequest()
         });
     },
     setTool: function(tool) {
       this.items = tool;
-      this.invoice.tools = [];
+      this.request.tools = [];
       tool.forEach(snapshot => {
-        this.invoice.tools.push(snapshot.id);
+        this.request.tools.push(snapshot.id);
       });
-      this.$log.debug(this.invoice.tools);
+      this.$log.debug(this.request.tools);
+    },
+    clearRequest: function () {
+      this.request.symptom = null
+      this.request.type = null
+      this.request.brand = null
+      this.request.sentDate = null
+      this.request.tools = []
+      this.request.email = null
+      this.request.phone = null
+      this.items = []
     }
   }
 };

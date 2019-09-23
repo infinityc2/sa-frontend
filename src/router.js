@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from './components/Login'
 import Register from './components/Register'
 import Customer from './components/customer/Dashboard'
-import Invoice from './components/customer/Invoice'
+import Request from './components/customer/Request'
 import Evaluation from './components/customer/Evaluation'
 import CancelInvoice from './components/customer/CancelInvoice'
 import Employee from './components/employee/Dashboard'
@@ -34,11 +34,11 @@ let router = new Router({
             children: [
                 {
                     path: '',
-                    redirect: 'invoice'
+                    redirect: 'request'
                 },
                 {
-                    path: 'invoice',
-                    component: Invoice
+                    path: 'request',
+                    component: Request
                 },
                 {
                     path: 'evaluation',

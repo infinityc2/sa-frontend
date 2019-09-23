@@ -48,25 +48,25 @@ export default {
     }),
 
     // incomplete
-    findInvoiceByCustomer: (data) => instance.get('invoice/' + data.email, {
+    findRequestByCustomer: (data) => instance.get('request/' + data.email, {
         transformResponse: (response) => {
             return JSON.parse(response)
         }
     }),
 
-    findInvoiceAll: () => instance.get('invoice/menu', {
+    findRequestAll: () => instance.get('request/menu', {
         transformResponse: (response) => {
             return JSON.parse(response)
         }
     }),
 
-    findInvoiceById: (data) => instance.get('invoice/' + data.id, {
+    findRequestById: (data) => instance.get('request/' + data.id, {
         transformResponse: (response) => {
             return JSON.parse(response)
         }
     }),
 
-    postInvoice: (data) => instance.post('invoice/repair/' + data.tools, {
+    addRequest: (data) => instance.post('request/repair/' + data.tools, {
         brand: data.brand,
         type: data.type,
         email: data.email,

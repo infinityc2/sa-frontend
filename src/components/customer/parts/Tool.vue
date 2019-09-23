@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import InvoiceController from "@/services/InvoiceController";
+import RequestController from "@/services/RequestController";
 
 export default {
   data: () => ({
@@ -54,11 +54,12 @@ export default {
   methods: {
     selectTool: function() {
       this.$emit("addTool", this.selected);
+      this.selected = []
       this.dialog = false
     }
   },
   mounted() {
-    InvoiceController.getTool().then(response => {
+    RequestController.getTool().then(response => {
       this.$log.debug("Data loaded: ", response.data);
       response.data.forEach(element => {
         this.tools.push({
