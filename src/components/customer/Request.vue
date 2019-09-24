@@ -89,7 +89,6 @@
 </template>
 
 <script>
-import RequestController from "../../services/RequestController";
 import Tool from "./parts/Tool";
 
 export default {
@@ -125,7 +124,7 @@ export default {
     this.request.customer = Number(this.$route.params.user);
   },
   mounted() {
-    RequestController.getBrand().then(response => {
+    this.$http.getBrand().then(response => {
       this.$log.debug("Data loaded: ", response.data);
       response.data.forEach(element => {
         this.brand.push({
@@ -134,7 +133,7 @@ export default {
         });
       });
     });
-    RequestController.getComputerType().then(response => {
+    this.$http.getComputerType().then(response => {
       this.$log.debug("Data loaded: ", response.data);
       response.data.forEach(element => {
         this.computerType.push({
@@ -147,7 +146,7 @@ export default {
   methods: {
     addRequest: function() {
       this.$log.debug(this.request);
-      RequestController.addRequest(this.request)
+      this.$http.addRequest(this.request)
         .then(response => {
           this.message = "การแจ้งซ่อมสำเร็จ";
           this.$log.debug("Add Request Complete", response.data);

@@ -3,9 +3,12 @@ import App from './App.vue'
 import VueLogger from 'vuejs-logger'
 import vuetify from './plugins/vuetify'
 import router from './router'
+import controller from './services/controller'
 import '@babel/polyfill'
 
 Vue.config.productionTip = false
+
+Vue.prototype.$http = controller
 
 const options = {
   isEnabled: true,

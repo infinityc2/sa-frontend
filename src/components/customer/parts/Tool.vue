@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import RequestController from "@/services/RequestController";
-
 export default {
   data: () => ({
     dialog: false,
@@ -59,7 +57,7 @@ export default {
     }
   },
   mounted() {
-    RequestController.getTool().then(response => {
+    this.$http.getTool().then(response => {
       this.$log.debug("Data loaded: ", response.data);
       response.data.forEach(element => {
         this.tools.push({

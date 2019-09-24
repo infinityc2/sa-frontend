@@ -51,8 +51,6 @@
 </template>
 
 <script>
-import RequestController from "../services/RequestController";
-
 export default {
   data: () => ({
     user: {
@@ -64,7 +62,7 @@ export default {
   }),
   methods: {
     login: function() {
-      RequestController.loginCustomer(this.user)
+      this.$http.loginCustomer(this.user)
         .then(response => {
           if (response.data.id) {
             this.$log.debug(response.data.message, this.user.email);

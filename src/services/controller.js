@@ -47,13 +47,6 @@ export default {
         phone: data.phone
     }),
 
-    // incomplete
-    findRequestByCustomer: (data) => instance.get('customer/' + data.id, {
-        transformResponse: (response) => {
-            return JSON.parse(response)
-        }
-    }),
-
     findRequestAll: () => instance.get('request/menu', {
         transformResponse: (response) => {
             return JSON.parse(response)
@@ -75,4 +68,5 @@ export default {
         customer: data.customer,
         sentDate: data.sentDate
     })
+    // -------------------------------------------------------------------------- 
 }
