@@ -38,6 +38,10 @@
                   <v-btn color="primary" @click.prevent="login" tile type="submit">เข้าสู่ระบบ</v-btn>
                 </v-card-actions>
               </v-flex>
+              <v-snackbar v-model="snackbar">
+                {{ message }}
+                <v-btn text color="primary" @click="snackbar = !snackbar">ปิด</v-btn>
+              </v-snackbar>
             </v-card>
           </v-flex>
         </v-layout>
@@ -47,28 +51,35 @@
 </template>
 
 <script>
-import RequestController from '../services/RequestController'
+import RequestController from "../services/RequestController";
 
 export default {
   data: () => ({
     user: {
       email: "",
-      password: ""
-    }
+      password: "",
+    },
+    snackbar: false,
+    message: ""
   }),
   methods: {
-    login: function () {
-      RequestController.loginCustomer(this.user).then(response => {
-        if (response.data.id) {
-          this.$log.debug(response.data.message, this.user.email);
-          this.$router.push('/customer/' + response.data.id)
-        } else {
-          this.$log.debug(response.data.message)
-        }
-      })
-      .catch(error => {
-        this.$log.debug('Invalid Email or Password', error);
-      })
+    login: function() {
+      RequestController.loginCustomer(this.user)
+        .then(response => {
+          if (response.data.id) {
+            this.$log.debug(response.data.message, this.user.email);
+            this.$router.push("/customer/" + response.data.id);
+          } else {
+            this.$log.debug(response.data.message);
+          }
+          this.message = response.data.message;
+        })
+        .catch(error => {
+          this.$log.debug("Invalid Email or Password", error);
+        })
+        .finally(() => {
+          this.snackbar = !this.snackbar;
+        });
     }
   }
 };

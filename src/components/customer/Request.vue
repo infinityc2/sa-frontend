@@ -82,7 +82,7 @@
     </v-card-actions>
 
     <v-snackbar v-model="snackbar">
-      {{ warningText }}
+      {{ message }}
       <v-btn text color="primary" @click="snackbar = !snackbar">ปิด</v-btn>
     </v-snackbar>
   </v-card>
@@ -100,7 +100,7 @@ export default {
     date: null, // new Date().toDateString().substr(0, 10),
     menu: false,
     snackbar: false,
-    warningText: "",
+    message: "",
     items: [],
     request: {
       symptom: null,
@@ -149,11 +149,11 @@ export default {
       this.$log.debug(this.request);
       RequestController.addRequest(this.request)
         .then(response => {
-          this.warningText = "การแจ้งซ่อมสำเร็จ";
+          this.message = "การแจ้งซ่อมสำเร็จ";
           this.$log.debug("Add Request Complete", response.data);
         })
         .catch(error => {
-          this.warningText = "ไม่สามารถทำการแจ้งซ่อมได้";
+          this.message = "ไม่สามารถทำการแจ้งซ่อมได้";
           this.$log.debug(error.response.data.message);
         })
         .finally(() => {
@@ -179,6 +179,7 @@ export default {
       this.request.phone = null
       this.items = []
     }
+    
   }
 };
 </script>

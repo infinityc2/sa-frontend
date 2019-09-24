@@ -48,7 +48,7 @@ export default {
     }),
 
     // incomplete
-    findRequestByCustomer: (data) => instance.get('request/' + data.email, {
+    findRequestByCustomer: (data) => instance.get('customer/' + data.id, {
         transformResponse: (response) => {
             return JSON.parse(response)
         }
