@@ -19,7 +19,7 @@
               </v-list-item>
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title>ชนิดของคอมพิวเตอร์: {{ order.type.type }}</v-list-item-title>
+                  <v-list-item-title>ชนิดของคอมพิวเตอร์: {{ order.computerType.type }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
@@ -80,7 +80,6 @@ export default {
             ...element,
             tool: snapshot.data
           });
-          this.$log.debug("Data loaded:", this.orderRequest);
         });
       });
     });

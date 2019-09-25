@@ -61,7 +61,7 @@ export default {
 
     addRequest: (data) => instance.post('request/repair/' + data.tools, {
         brand: data.brand,
-        type: data.type,
+        computerType: data.computerType,
         email: data.email,
         phone: data.phone,
         symptom: data.symptom,
@@ -73,6 +73,18 @@ export default {
         transformResponse: (response) => {
             return JSON.parse(response)
         }
-    })
+    }),
     // -------------------------------------------------------------------------- 
+
+    newEvaluation: (data) => instance.post('evaluation/' + data.request + '/' + data.repairman + '/' + data.satisfaction, {
+        suggestion: data.suggestion
+    }),
+
+    getSatisfaction: () => instance.get('satisfaction', {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
+    }),
+
+    // --------------------------------------------------------------------------
 }

@@ -17,7 +17,7 @@
             <v-flex xs12 md4>
               <v-select
                 label="ชนิดของคอมพิวเตอร์"
-                v-model="request.type"
+                v-model="request.computerType"
                 :items="computerType"
                 :rules="[rules.require]"
               ></v-select>
@@ -103,7 +103,7 @@ export default {
     items: [],
     request: {
       symptom: null,
-      type: null,
+      computerType: null,
       brand: null,
       sentDate: null,
       tools: [],
@@ -170,7 +170,7 @@ export default {
     },
     clearRequest: function () {
       this.request.symptom = null
-      this.request.type = null
+      this.request.computerType = null
       this.request.brand = null
       this.request.sentDate = null
       this.request.tools = []
