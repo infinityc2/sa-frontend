@@ -50,7 +50,7 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="request.sentDate" no-title scrollable>
+                <v-date-picker v-model="request.sentDate" no-title scrollable locale="th">
                   <v-spacer></v-spacer>
                   <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
                   <v-btn text color="primary" @click="$refs.menu.save(request.sentDate)">OK</v-btn>
@@ -145,11 +145,11 @@ export default {
   },
   methods: {
     addRequest: function() {
-      this.$log.debug(this.request);
       this.$http.addRequest(this.request)
         .then(response => {
           this.message = "การแจ้งซ่อมสำเร็จ";
           this.$log.debug("Add Request Complete", response.data);
+          this.$router.push("order");
         })
         .catch(error => {
           this.message = "ไม่สามารถทำการแจ้งซ่อมได้";

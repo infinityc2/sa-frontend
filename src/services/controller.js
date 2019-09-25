@@ -53,7 +53,7 @@ export default {
         }
     }),
 
-    findRequestById: (data) => instance.get('request/' + data.id, {
+    findRequestByCustomer: (data) => instance.get('request/customer/' + data, {
         transformResponse: (response) => {
             return JSON.parse(response)
         }
@@ -67,6 +67,12 @@ export default {
         symptom: data.symptom,
         customer: data.customer,
         sentDate: data.sentDate
+    }),
+
+    findByRequest: (data) => instance.get('tool/request/' + data, {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
     })
     // -------------------------------------------------------------------------- 
 }

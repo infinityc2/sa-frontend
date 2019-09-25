@@ -2,10 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './components/Login'
 import Register from './components/Register'
+import NotFound from './components/NotFound'
 import Customer from './components/customer/Dashboard'
 import Request from './components/customer/Request'
 import Evaluation from './components/customer/Evaluation'
 import CancelInvoice from './components/customer/CancelInvoice'
+import OrderRequest from './components/customer/OrderRequest'
 import Employee from './components/employee/Dashboard'
 import Payment from './components/employee/Payment'
 
@@ -19,6 +21,10 @@ let router = new Router({
             redirect: '/login'
         },
         {
+            path: '*',
+            redirect: '/notfound'
+        },
+        {
             path: '/login',
             component: Login
         },
@@ -27,12 +33,16 @@ let router = new Router({
             component: Register
         },
         {
+            path: '/notfound',
+            component: NotFound
+        },
+        {
             path: '/customer/:user',
             component: Customer,
             children: [
                 {
                     path: '',
-                    redirect: 'request'
+                    redirect: 'order'
                 },
                 {
                     path: 'request',
@@ -45,6 +55,10 @@ let router = new Router({
                 {
                     path: 'cancel',
                     component: CancelInvoice
+                },
+                {
+                    path: 'order',
+                    component: OrderRequest
                 }
             ],
         },

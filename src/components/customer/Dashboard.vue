@@ -16,16 +16,25 @@
 
         <v-list-item link to="request">
           <v-list-item-action>
-            <v-icon>add</v-icon>
+            <v-icon>add_circle</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title class="grey--text">แจ้งซ่อม</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link to="order">
+          <v-list-item-action>
+            <v-icon>assignment</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="grey--text">รายการแจ้งซ่อม</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link to="cancel">
           <v-list-item-action>
-            <v-icon>remove</v-icon>
+            <v-icon>delete</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title class="grey--text">ยกเลิกแจ้งซ่อม</v-list-item-title>
