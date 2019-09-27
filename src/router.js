@@ -8,6 +8,7 @@ import Request from './components/customer/Request'
 import Evaluation from './components/customer/Evaluation'
 import CancelInvoice from './components/customer/CancelInvoice'
 import OrderRequest from './components/customer/OrderRequest'
+import Order from './components/customer/Order'
 import Employee from './components/employee/Dashboard'
 import Payment from './components/employee/Payment'
 
@@ -59,6 +60,10 @@ let router = new Router({
                 {
                     path: 'order',
                     component: OrderRequest
+                },
+                {
+                    path: ':req',
+                    component: Order
                 }
             ],
         },

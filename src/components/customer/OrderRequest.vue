@@ -2,7 +2,7 @@
   <v-card color="secondary" tile elevation="24" max-width="600" class="mx-auto" min-height="500">
     <v-card-title class="display-1">รายการแจ้งซ่อม</v-card-title>
     <v-card-text>
-      <v-expansion-panels mandatory accordion>
+      <v-expansion-panels accordion v-if="orderRequest.length > 0">
         <v-expansion-panel v-for="order in orderRequest" :key="order.id">
           <v-expansion-panel-header>{{ order.requestCode }}</v-expansion-panel-header>
           <v-expansion-panel-content>
@@ -55,9 +55,11 @@
                 </v-list-item>
               </v-list-group>
             </v-list>
+            <v-btn outlined :to="order.id.toString()" replace color="primary" tile>รายละเอียด</v-btn>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
+      <p v-else class="text-center font-weight-bold">ไม่มีการแจ้งซ่อม</p>
     </v-card-text>
   </v-card>
 </template>
@@ -74,8 +76,10 @@ export default {
   mounted() {
     this.$http.findRequestByCustomer(this.customer).then(response => {
       this.$log.debug("Data loaded:", response.data);
-      response.data.reverse().forEach(element => {
+      response.data.forEach(element => {
         this.$http.findByRequest(element.id).then(snapshot => {
+          element.requestDate = element.requestDate.split("T")[0]
+          element.sentDate = element.sentDate.split("T")[0]
           this.orderRequest.push({
             ...element,
             tool: snapshot.data

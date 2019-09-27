@@ -149,7 +149,7 @@ export default {
         .then(response => {
           this.message = "การแจ้งซ่อมสำเร็จ";
           this.$log.debug("Add Request Complete", response.data);
-          this.$router.push("order");
+          this.$router.push(response.data.id.toString());
         })
         .catch(error => {
           this.message = "ไม่สามารถทำการแจ้งซ่อมได้";

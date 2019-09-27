@@ -53,7 +53,13 @@ export default {
         }
     }),
 
-    findRequestByCustomer: (data) => instance.get('request/customer/' + data, {
+    findRequestById: (id) => instance.get('request/menu/' + id, {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
+    }),
+
+    findRequestByCustomer: (id) => instance.get('request/customer/' + id, {
         transformResponse: (response) => {
             return JSON.parse(response)
         }
