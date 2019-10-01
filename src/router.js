@@ -11,6 +11,7 @@ import OrderRequest from './components/customer/OrderRequest'
 import Order from './components/customer/Order'
 import Employee from './components/employee/Dashboard'
 import Payment from './components/employee/Payment'
+import Repairman from './components/employee/Repairman'
 
 Vue.use(Router)
 
@@ -78,6 +79,10 @@ let router = new Router({
                 {
                     path: 'payment',
                     component: Payment
+                },
+                {
+                    path: 'repairman',
+                    component: Repairman
                 }
             ],
         }

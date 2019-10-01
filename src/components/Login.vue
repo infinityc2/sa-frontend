@@ -14,7 +14,7 @@
               <v-flex>
                 <v-card-title>เข้าสู่ระบบ</v-card-title>
                 <v-card-text>
-                  <v-form @keyup.enter="login">
+                  <v-form>
                     <v-text-field
                       label="อีเมล์"
                       name="login"
@@ -64,6 +64,9 @@ export default {
     login: function() {
       this.$http.loginCustomer(this.user)
         .then(response => {
+          if (this.user.email === "admin" && this.user.password === "admin") {
+            this.$router.push('/employee/admin')
+          }
           if (response.data.id) {
             this.$log.debug(response.data.message, this.user.email);
             this.$router.push("/customer/" + response.data.id);

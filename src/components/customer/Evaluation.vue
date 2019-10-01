@@ -8,12 +8,15 @@
         <v-container>
           <v-layout wrap column>
             <v-flex xs12 md4>
-              <v-select label="ID การแจ้งซ่อม" :items="requests" v-model="evaluation.request"></v-select>
+              <h6 class="title black--text">การแจ้งซ่อมคอมพิวเตอร์</h6>
+              <v-select label="idการแจ้งซ่อม" :items="requests" v-model="evaluation.request"></v-select>
             </v-flex>
             <v-flex xs12 md4>
-              <v-select label="ช่างซ่อมคอมพิวเตอร์" v-model="evaluation.repairman"></v-select>
+              <h6 class="title black--text">ช่างซ่อมคอมพิวเตอร์</h6>
+              <v-select label="ชื่อ-นามสกุล" v-model="evaluation.repairman" :items="repairmans"></v-select>
             </v-flex>
             <v-flex xs12 md4>
+              <h6 class="title black--text">บริการการแจ้งซ่อม</h6>
               <v-select
                 label="ความพึงพอใจ"
                 :items="satisfactions"
@@ -21,7 +24,8 @@
               ></v-select>
             </v-flex>
             <v-flex>
-              <v-textarea label="ข้อเสนอแนะ" v-model="evaluation.suggestion"></v-textarea>
+              <h6 class="title black--text">ข้อเสนอแนะ</h6>
+              <v-textarea name="input-7-1" v-model="evaluation.suggestion"></v-textarea>
             </v-flex>
           </v-layout>
         </v-container>
@@ -78,17 +82,26 @@ export default {
         });
       });
     });
+    this.$http.getRepairman().then(response => {
+      this.$log.debug("Data loaded:", response.data)
+      response.data.forEach(element => {
+        this.repairmans.push({
+          text: element.firstName + ' ' + element.lastName,
+          value: element.id
+        })
+      })
+    })
   },
   methods: {
     addEvaluation: function() {
       this.$http
         .newEvaluation(this.evaluation)
         .then(response => {
-          this.message = "ประเมินสำเร็จ";
+          this.message = "ข้อมูลครบถ้วน";
           this.$log.debug("Add Evaluation Complete", response.data);
         })
         .catch(error => {
-          this.message = "ไม่สามารถทำการประเมินได้";
+          this.message = "ข้อมูลไม่ครบถ้วน";
           this.$log.debug(error.response.data.message);
         })
         .finally(() => {

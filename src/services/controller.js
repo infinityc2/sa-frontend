@@ -42,9 +42,7 @@ export default {
 
     // incomplete
     register: (data) => instance.post('customer/register', {
-        email: data.email,
-        password: data.password,
-        phone: data.phone
+        ...data
     }),
 
     findRequestAll: () => instance.get('request/menu', {
@@ -92,5 +90,46 @@ export default {
         }
     }),
 
+    getRepairman: () => instance.get('repairman/member', {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
+    }),
+
     // --------------------------------------------------------------------------
+
+    getGender: () => instance.get('gender', {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
+    }),
+
+    getCustomerType: () => instance.get('customertype', {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
+    }),
+
+    getProvince: () => instance.get('province', {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
+    }),
+    // ------------------------------------------------------------
+
+    getExpertise: () => instance.get('expertise/expert', {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
+    }),
+
+    getPosition: () => instance.get('position', {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
+    }),
+
+    addRepairman: (data) => instance.post('repairman/register', {
+        ...data
+    })
 }

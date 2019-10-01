@@ -22,6 +22,15 @@
             <v-list-item-title class="grey--text">ชำระเงิน</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item link to="repairman">
+          <v-list-item-action>
+            <v-icon>add</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="grey--text">เพิ่มช่างซ่อม</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <v-divider dark class="my-4"></v-divider>
       <v-list dense class="deep-orange lighten-5">
