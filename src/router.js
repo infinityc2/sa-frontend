@@ -6,7 +6,7 @@ import NotFound from './components/NotFound'
 import Customer from './components/customer/Dashboard'
 import Request from './components/customer/Request'
 import Evaluation from './components/customer/Evaluation'
-import CancelInvoice from './components/customer/CancelInvoice'
+import CancelRequest from './components/customer/CancelRequest'
 import OrderRequest from './components/customer/OrderRequest'
 import Order from './components/customer/Order'
 import Employee from './components/employee/Dashboard'
@@ -56,7 +56,7 @@ let router = new Router({
                 },
                 {
                     path: 'cancel',
-                    component: CancelInvoice
+                    component: CancelRequest
                 },
                 {
                     path: 'order',

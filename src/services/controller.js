@@ -142,5 +142,19 @@ export default {
         transformResponse: (response) => {
             return JSON.parse(response)
         }
-    })
+    }),
+    // ------------------------------------------------------------------
+    getAllProductReceiveTypes: () => instance.get('product', {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
+    }),
+
+    getCancelationCauses: () => instance.get('cause', {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
+    }),
+
+    addCancelRepair: (data) => instance.post(`cancel/${data.request}/${data.cancelationCause}/${data.productReceive}`)
 }
