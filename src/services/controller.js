@@ -131,5 +131,16 @@ export default {
 
     addRepairman: (data) => instance.post('repairman/register', {
         ...data
+    }),
+
+    // ------------------------------------------------------------------
+    addPayment: (data) => instance.post(`payment/${data.paymentType}/${data.request}/${data.repairman}`, {
+        fee: data.fee
+    }),
+
+    getAllPaymentType: () => instance.get('payment/type', {
+        transformResponse: (response) => {
+            return JSON.parse(response)
+        }
     })
 }

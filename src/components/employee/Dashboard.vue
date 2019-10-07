@@ -16,7 +16,7 @@
 
         <v-list-item link to="payment">
           <v-list-item-action>
-            <v-icon>add</v-icon>
+            <v-icon>list_alt</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title class="grey--text">ชำระเงิน</v-list-item-title>
@@ -25,7 +25,7 @@
 
         <v-list-item link to="repairman">
           <v-list-item-action>
-            <v-icon>add</v-icon>
+            <v-icon>add_circle_outline</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title class="grey--text">เพิ่มช่างซ่อม</v-list-item-title>
