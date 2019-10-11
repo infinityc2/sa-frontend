@@ -65,9 +65,11 @@ export default {
       this.$http.loginCustomer(this.user)
         .then(response => {
           if (this.user.email === "admin" && this.user.password === "admin") {
+            localStorage.setItem('username', response.data)
             this.$router.push('/employee/admin')
           }
           if (response.data.id) {
+            localStorage.setItem('username', response.data)
             this.$log.debug(response.data.message, this.user.email);
             this.$router.push("/customer/" + response.data.id);
           } else {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './components/Login'
-import Register from './components/Register'
+import Register from './components/Customer'
 import NotFound from './components/NotFound'
 import Customer from './components/customer/Dashboard'
 import Request from './components/customer/Request'
@@ -67,6 +67,9 @@ let router = new Router({
                     component: Order
                 }
             ],
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/employee/:user',
@@ -85,8 +88,24 @@ let router = new Router({
                     component: Repairman
                 }
             ],
+            meta: {
+                requiresAuth: true
+            }
         }
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    const loggedIn = localStorage.getItem('username')
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if(!loggedIn) {
+            next('/login')
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
 })
 
 export default router

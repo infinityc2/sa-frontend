@@ -57,7 +57,7 @@
             <v-subheader>ระบบ</v-subheader>
           </v-flex>
         </v-layout>
-        <v-list-item link to="/login">
+        <v-list-item @click="logout">
           <v-list-item-action>
             <v-icon>clear</v-icon>
           </v-list-item-action>
@@ -86,7 +86,13 @@
 export default {
   data: () => ({
     drawer: null
-  })
+  }),
+  methods: {
+    logout: function () {
+      localStorage.removeItem('username')
+      this.$router.push('/login')
+    }
+  }
 };
 </script>
 

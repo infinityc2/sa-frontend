@@ -156,5 +156,7 @@ export default {
         }
     }),
 
-    addCancelRepair: (data) => instance.post(`cancel/${data.request}/${data.cancelationCause}/${data.productReceive}`)
+    addCancelRepair: (data) => instance.post(`cancel/${data.request}/${data.cancelationCause}/${data.productReceive}`),
+
+    deleteRequestById: (data) => instance.delete(`request/delete/${data}`)
 }
